@@ -2,14 +2,19 @@ from __future__ import division
 
 import torch, torchvision
 import numpy as np
+import os
 
 from score_trainer.train import LeNet
 
 
 class roiCheck:
-    def __init__(self, state_file):
+    def __init__(self, state_file=None):
+        if state_file is None:
+            state_file = os.path.join(os.path.dirname(__file__), "state_ep10.net")
+            if not os.path.exists(state_file):
+                raise OSError(f"Default state file {state_file} does not exists, please run `score.getMod`")
         self.state_file = state_file
-        state = torch.load(self.state_file)
+        state = torch.load(self.state_file, weights_only=True)
         self.model = LeNet()
         self.model.load_state_dict(state)
         self.model.eval()

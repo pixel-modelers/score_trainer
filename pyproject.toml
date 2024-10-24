@@ -24,4 +24,5 @@ score_trainer = ["*.stol"]
 [project.scripts]
 "score.makeTraDat" = "score_trainer.make_train_data:main"
 "score.train" = "score_trainer.train:main"
-"score.plotTraDat" = "score_trainer.train_loader:main" 
+"score.plotTraDat" = "score_trainer.train_loader:main"
+"score.getMod" = "score_trainer.download_model:main"
