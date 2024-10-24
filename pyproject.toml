@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "score_trainer"
+version = "0.1"
+dependencies = [
+    "h5py",
+    "numpy",
+    "torch",
+    "torchvision",
+    "torchmetrics",
+    "dxtbx",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["score_trainer*"]
+
+[tool.setuptools.package-data]
+score_trainer = ["*.stol"]
+
+[project.scripts]
+"score.makeTraDat" = "score_trainer.make_train_data:main"
+"score.train" = "score_trainer.train:main"
+"score.plotTraDat" = "score_trainer.train_loader:main" 
