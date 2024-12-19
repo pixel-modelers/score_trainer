@@ -24,7 +24,12 @@ def dl(url):
 def main():
     print("Downloading model file")
     for name in CHECKSUMS:
-        f = dl(f"https://smb.slac.stanford.edu/~dermen/{name}")
+        url=f"https://smb.slac.stanford.edu/~dermen/{name}"
+        try:
+            f = dl(url)
+        except Exception as err:
+            os.system(f"wget {url}")
+            f=name
         md5 = hashlib.md5(open(f, 'rb').read()).hexdigest()
         print(f"Checksum for {f}={md5}")
         assert md5 == CHECKSUMS[name]
